@@ -1,11 +1,14 @@
 package com.example.demo.homework7;
 
+import com.example.demo.lesson7.data.Student;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/v1")
 public class ProductController {
     ProductService productService;
 
@@ -14,12 +17,12 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public List<Product> findAllProducts() {
+    public List<ProductDto> findAllProducts() {
         return productService.findAll();
     }
 
     @GetMapping("/products/{id}")
-    public Product findById(@PathVariable(name = "id") Long id) {
+    public ProductDto findById(@PathVariable(name = "id") Long id) {
         return productService.findById(id);
     }
 
@@ -28,23 +31,28 @@ public class ProductController {
         productService.addProduct(title, price);
     }
 
-    @GetMapping("/products/delete/{id}")
-    public void deleteProduct(@PathVariable(name = "id") Long id) {
+    @DeleteMapping("/{id}")
+    public void deleteProductByID(@PathVariable(name = "id") Long id) {
         productService.delete(id);
     }
 
+    @PutMapping
+    public ProductDto updateStudent(@RequestBody Product product){
+        return productService.addProduct(product);
+    }
+
     @GetMapping("/products/min/{minprice}")
-    public List<Product> getProductByPriceAfter(@PathVariable(name = "minprice") Integer minPrice) {
+    public List<ProductDto> getProductByPriceAfter(@PathVariable(name = "minprice") Integer minPrice) {
         return productService.findAllByPriceAfter(minPrice);
     }
 
     @GetMapping("/products/max/{maxprice}")
-    public List<Product> getProductByPriceBefore(@PathVariable(name = "maxprice") Integer maxPrice) {
+    public List<ProductDto> getProductByPriceBefore(@PathVariable(name = "maxprice") Integer maxPrice) {
         return productService.findAllByPriceBefore(maxPrice);
     }
 
     @GetMapping("/products/between")
-    public List<Product> getProductByPriceBefore(@RequestParam(name = "minprice") Integer minPrice,
+    public List<ProductDto> getProductByPriceBefore(@RequestParam(name = "minprice") Integer minPrice,
                                                  @RequestParam(name = "maxprice") Integer maxPrice) {
         return productService.findAllByPriceBetween(minPrice, maxPrice);
     }

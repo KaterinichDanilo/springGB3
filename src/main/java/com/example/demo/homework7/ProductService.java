@@ -1,7 +1,9 @@
 package com.example.demo.homework7;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -12,12 +14,14 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public List<ProductDto> findAll() {
+        List<ProductDto> productDto = new ArrayList<>();
+        productRepository.findAll().forEach(p -> productDto.add(new ProductDto(p)));
+        return productDto;
     }
 
-    public Product findById(Long id) {
-        return productRepository.findById(id).orElseThrow();
+    public ProductDto findById(Long id) {
+        return productRepository.findById(id).map(p -> new ProductDto(p)).orElseThrow();
     }
 
     public Product findByTitle(String title) {
@@ -27,20 +31,29 @@ public class ProductService {
     public void addProduct(String title, Integer price) {
         productRepository.save(new Product(title, price));
     }
+    public ProductDto addProduct(Product product) {
+        return new ProductDto(productRepository.save(product));
+    }
 
     public void delete(Long id) {
         productRepository.deleteById(id);
     }
 
-    public List<Product> findAllByPriceBefore(Integer max) {
-        return productRepository.findAllByPriceBefore(max);
+    public List<ProductDto> findAllByPriceBefore(Integer max) {
+        List<ProductDto> productDto = new ArrayList<>();
+        productRepository.findAllByPriceBefore(max).forEach(p -> productDto.add(new ProductDto(p)));
+        return productDto;
     }
 
-    public List<Product> findAllByPriceAfter(Integer min) {
-        return productRepository.findAllByPriceAfter(min);
+    public List<ProductDto> findAllByPriceAfter(Integer min) {
+        List<ProductDto> productDto = new ArrayList<>();
+        productRepository.findAllByPriceAfter(min).forEach(p -> productDto.add(new ProductDto(p)));
+        return productDto;
     }
 
-    public List<Product> findAllByPriceBetween(Integer min, Integer max) {
-        return productRepository.findAllByPriceBetween(min, max);
+    public List<ProductDto> findAllByPriceBetween(Integer min, Integer max) {
+        List<ProductDto> productDto = new ArrayList<>();
+        productRepository.findAllByPriceBetween(min, max).forEach(p -> productDto.add(new ProductDto(p)));
+        return productDto;
     }
 }
