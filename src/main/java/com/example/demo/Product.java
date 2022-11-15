@@ -1,4 +1,4 @@
-package com.example.demo.homework7;
+package com.example.demo;
 
 import javax.persistence.*;
 
