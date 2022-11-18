@@ -1,14 +1,13 @@
-package com.example.demo.controllers;
+package com.example.demo.lesson7.controllers;
 
-import com.example.demo.data.Student;
-import com.example.demo.services.StudentService;
+import com.example.demo.lesson7.data.Student;
+import com.example.demo.lesson7.services.StudentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class StudentController {

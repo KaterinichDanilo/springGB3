@@ -1,4 +1,4 @@
-package com.example.demo.data;
+package com.example.demo.lesson7.data;
 
 import javax.persistence.*;
 

@@ -1,13 +1,11 @@
-package com.example.demo.services;
+package com.example.demo.lesson7.services;
 
-import com.example.demo.data.Student;
-import com.example.demo.repositories.StudentRepository;
+import com.example.demo.lesson7.data.Student;
+import com.example.demo.lesson7.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.beans.Transient;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StudentService {
