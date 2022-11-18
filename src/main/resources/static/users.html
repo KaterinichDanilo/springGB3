@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="users.js"></script>
+    <title>Users</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>Login</td>
+            <td>Password</td>
+        </tr>
+        <tbody>
+            <tr ng-repeat="u in usersList">
+                <td>{{u.login}}</td>
+                <td>{{u.password}}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
